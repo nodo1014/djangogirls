@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
@@ -12,7 +11,6 @@ def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     # 게시 예약 기능이 되겠구나... __lte=timezone.now()
     # 어이가 없네 개쉑히. created_date 가 아녔네. 아 놔...썅
-    # posts = Post.objects.all
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_draft_list(request):

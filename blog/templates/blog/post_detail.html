@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <div class="post">
+  <div class="date">
+        {% if post.published_date %}
+
+                발행일(published_date): {{ post.published_date }}
+
+        {% else %}
+
+                미공개 상태 (저장만 됐어요. {{ post.created_date }} )
+
+        {% endif %}
+
+      </div>
+
+
+        {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        {% endif %}
+
+        {% if post.published_date %}
+        {% else %}
+        <a href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        {% endif %}
+
+
+      <div >  <h1>{{ post.title }}</h1>
+
+        </div>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
